@@ -60,13 +60,13 @@ label {
 input,
 textarea {
   width: 100%;
-  padding: 1px;
+  padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
 }
 button {
-  padding: 12px 20px;
+  padding: 12px;
   background-color: #42b983;
   color: white;
   border: none;

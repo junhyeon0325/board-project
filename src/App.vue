@@ -5,6 +5,10 @@
     <!-- PostForm에서 add-post를 불러주면은 addPost이벤트 핸들러가 실행되도록 -->
     <PostList v-bind:posts="posts" />
     <!-- 밑에 data에 있는 posts배열을 posts라는 이름으로 postlist에 전달한다 -->
+
+    <a @click="kakaoLogin">
+      <img src="./assets/kakao_logo.png" />
+    </a>
   </div>
 </template>
 
@@ -40,6 +44,30 @@ export default {
         title: post.title,
         content: post.content,
         date: new Date().toLocaleDateString(),
+      });
+    },
+    kakaoLogin() {
+      window.Kakao.Auth.login({
+        scope: "profile_nickname, account_email",
+        success: this.getKakaoAccount,
+      });
+    },
+    getKakaoAccount() {
+      window.Kakao.API.request({
+        url: "/v2/user/me",
+        success: (res) => {
+          console.log(res);
+          const kakao_account = res.kakao_account;
+          const nickname = kakao_account.profile.nickname;
+          const email = kakao_account.email;
+          console.log("nickname", nickname);
+          console.log("email", email);
+          // 로그인 처리 구현
+          alert("로그인 성공!");
+        },
+        fail: (error) => {
+          console.log(error);
+        },
       });
     },
   },

@@ -1,5 +1,6 @@
 <template>
   <h3>{{ msg }}</h3>
+  <slot name="header"></slot>
   <form @submit.prevent="handleSubmit" class="post-form">
     <!-- prevent 기본기능을 차단하는 기능임 -->
     <div class="form-group">
@@ -13,9 +14,11 @@
       <label for="content">내용</label>
       <textarea id="content" v-model="content" rows="4" required></textarea>
     </div>
+    <slot></slot>
     <button type="submit">글 등록</button>
     <!-- 이거 만들때는 button:submit엔터 하심 -->
   </form>
+  <slot name="footer"></slot>
 </template>
 
 <script>

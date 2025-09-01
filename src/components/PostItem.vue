@@ -3,7 +3,7 @@
     <h3>{{ post.title }}</h3>
     <p>{{ post.content }}</p>
     <small>작성일: {{ post.date }}</small>
-    <p>작성자:{{ uid }}</p>
+    <p>작성자:{{ user.id }}</p>
     <!-- 여기서 사용하겠다 라는 의미 -->
   </div>
 </template>
@@ -18,7 +18,7 @@ export default {
   props: {
     post: { type: Object, default: () => {} },
   },
-  inject: ["uid"], // 여기서 uid속성값을 읽어와서, 상위 컴포넌트에서 불러오는 inject
+  inject: ["user"], // 여기서 uid속성값을 읽어와서, 상위 컴포넌트에서 불러오는 inject
 };
 </script>
 

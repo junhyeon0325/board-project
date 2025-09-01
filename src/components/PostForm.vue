@@ -1,6 +1,7 @@
 <template>
   <h3>{{ msg }}</h3>
-  <form action="" class="post-form">
+  <form @submit.prevent="handleSubmit" class="post-form">
+    <!-- prevent 기본기능을 차단하는 기능임 -->
     <div class="form-group">
       <label for="title">제목</label>
       <input type="text" id="title" v-model="title" required />
@@ -25,6 +26,18 @@ export default {
       title: "",
       content: "",
     };
+  },
+  methods: {
+    handleSubmit() {
+      let post = {
+        title: this.title,
+        content: this.content,
+      };
+      this.$emit("add-post", post);
+      // 입력필드초기화, 데이터를 emit으로 보내고나면 입력필드가 빈공간으로 만들어주는
+      this.title = "";
+      this.content = "";
+    },
   },
 };
 </script>

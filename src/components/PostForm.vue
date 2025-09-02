@@ -30,13 +30,27 @@ export default {
       content: "",
     };
   },
+  computed: {
+    // getters에 정의된 값에 접근할 수 있슴
+    boardNo() {
+      return this.$store.getters.getBoardNo;
+    },
+    logId() {
+      return this.$store.getters.getLogId;
+    },
+  },
   methods: {
     handleSubmit() {
       let post = {
+        id: this.boardNo,
         title: this.title,
         content: this.content,
+        date: new Date().toLocaleDateString(),
+        writer: this.logId,
       };
-      this.$emit("add-post", post);
+      // this.$emit("add-post", post);
+      // this.$store.commit("addBoard", post); // vuex에서 store mutation해서 값을 변경하는데 그걸 submit할때 실행하는 함수 handleSubmit안에 commit을 만들어서 'addBoard'로 보낸다는 의미 같은데?
+      this.$store.dispatch("saveBoard", post);
       // 입력필드초기화, 데이터를 emit으로 보내고나면 입력필드가 빈공간으로 만들어주는
       this.title = "";
       this.content = "";

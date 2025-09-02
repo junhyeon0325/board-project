@@ -45,16 +45,22 @@ export default {
     return {
       user: { id: "", name: "" },
       //uid: ref(), // ""그냥 이렇게 쓰면 원시값인데 ref(null)이걸하면 주소값을 봐라고 하는거
-      posts: [
-        // {
-        //   // 샘플 목록 만들려고 하나 만든거
-        //   id: 1,
-        //   title: "글등록연습",
-        //   content: "잘등록됩니다.",
-        //   date: new Date().toLocaleDateString(), // localeDateString이 우리나라 표현식하고 비슷하다
-        // },
-      ],
+      // posts: [
+      // {
+      //   // 샘플 목록 만들려고 하나 만든거
+      //   id: 1,
+      //   title: "글등록연습",
+      //   content: "잘등록됩니다.",
+      //   date: new Date().toLocaleDateString(), // localeDateString이 우리나라 표현식하고 비슷하다
+      // },
+      // ],
     };
+  },
+  computed: {
+    // 계산된 속성
+    posts() {
+      return this.$store.getters.getBoardList;
+    },
   },
   methods: {
     // addPost이벤트 핸들러 만들거임
@@ -87,6 +93,7 @@ export default {
           this.user.id = email;
           this.user.name = nickname;
           // this.uid.value = email; // 로그인 성공 시 uid 업데이트
+          this.$store.commit("setId", email); // vuex store mutations 에있는
         },
         fail: (error) => {
           console.log(error);
@@ -105,6 +112,9 @@ export default {
     return {
       user: this.user, // App.vue > PostList.vue > PostItem.vue
     };
+  },
+  mounted() {
+    console.log(this.$store.state.boardList);
   },
 };
 </script>

@@ -93,6 +93,7 @@ export default {
           this.user.id = email;
           this.user.name = nickname;
           // this.uid.value = email; // 로그인 성공 시 uid 업데이트
+          this.$store.commit("setId", email); // vuex store mutations 에있는
         },
         fail: (error) => {
           console.log(error);

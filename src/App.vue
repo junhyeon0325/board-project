@@ -3,7 +3,8 @@
     <h3>초간단 게시판</h3>
     <p v-if="!user.id">로그인을 진행하세요.</p>
     <div v-else>
-      <PostForm @add-post="addPost">
+      <!-- <PostForm @add-post="addPost"> -->
+      <PostForm>
         <!-- PostForm에서 add-post(attribute임 이거)를 불러주면은 addPost이벤트 핸들러가 실행되도록 -->
         <template v-slot:header>
           <div>Header</div>
@@ -64,14 +65,14 @@ export default {
   },
   methods: {
     // addPost이벤트 핸들러 만들거임
-    addPost(post) {
-      this.posts.push({
-        id: this.posts.length + 1,
-        title: post.title,
-        content: post.content,
-        date: new Date().toLocaleDateString(),
-      });
-    },
+    // addPost(post) {
+    //   this.posts.push({
+    //     id: this.posts.length + 1,
+    //     title: post.title,
+    //     content: post.content,
+    //     date: new Date().toLocaleDateString(),
+    //   });
+    // },
     kakaoLogin() {
       window.Kakao.Auth.login({
         scope: "profile_nickname, account_email",
